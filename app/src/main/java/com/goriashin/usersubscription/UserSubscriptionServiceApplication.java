@@ -1,4 +1,4 @@
-package com.goriashin.user_subscription_service;
+package com.goriashin.usersubscription;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
