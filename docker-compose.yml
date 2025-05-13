@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:17.5
+    container_name: pg-usersubscription
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: usersubscription
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
