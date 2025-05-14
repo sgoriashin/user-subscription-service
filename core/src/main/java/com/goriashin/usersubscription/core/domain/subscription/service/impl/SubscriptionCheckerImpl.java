@@ -1,7 +1,9 @@
 package com.goriashin.usersubscription.core.domain.subscription.service.impl;
 
+import com.goriashin.usersubscription.core.domain.subscription.exception.DuplicateUserSubscriptionException;
 import com.goriashin.usersubscription.core.domain.subscription.exception.SubscriptionNotLinkedToUserException;
 import com.goriashin.usersubscription.core.domain.subscription.model.SubscriptionTM;
+import com.goriashin.usersubscription.core.domain.subscription.repository.SubscriptionRepository;
 import com.goriashin.usersubscription.core.domain.subscription.service.SubscriptionChecker;
 import com.goriashin.usersubscription.core.domain.user.model.UserTM;
 import lombok.AllArgsConstructor;
@@ -10,6 +12,17 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class SubscriptionCheckerImpl implements SubscriptionChecker {
+
+    private final SubscriptionRepository repository;
+
+    @Override
+    public void duplicateUserSubscription(SubscriptionTM subscriptionTM) {
+        String subscriptionName = subscriptionTM.getSubscriptionName();
+        UserTM userTM = subscriptionTM.getUser();
+        if (repository.existsBySubscriptionNameAndUser(subscriptionName, userTM)) {
+            throw new DuplicateUserSubscriptionException(subscriptionName, userTM.getId());
+        }
+    }
 
     @Override
     public void isSubscriptionLinkedToUser(SubscriptionTM subscriptionTM, UserTM userTM) {

@@ -30,6 +30,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public SubscriptionTM createSubscription(SubscriptionTM subscriptionTM) {
+        checker.duplicateUserSubscription(subscriptionTM);
         return repository.saveAndFlush(subscriptionTM);
     }
 

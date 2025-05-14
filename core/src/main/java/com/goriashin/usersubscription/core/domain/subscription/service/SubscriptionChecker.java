@@ -6,6 +6,7 @@ import com.goriashin.usersubscription.core.domain.user.model.UserTM;
 
 public interface SubscriptionChecker {
 
+    void duplicateUserSubscription(SubscriptionTM subscriptionTM);
     void isSubscriptionLinkedToUser(SubscriptionTM subscriptionTM, UserTM userTM);
 
 }

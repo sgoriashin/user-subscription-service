@@ -1,5 +1,6 @@
 package com.goriashin.usersubscription.web.exception;
 
+import com.goriashin.usersubscription.core.domain.subscription.exception.DuplicateUserSubscriptionException;
 import com.goriashin.usersubscription.core.domain.subscription.exception.SubscriptionNotLinkedToUserException;
 import com.goriashin.usersubscription.core.domain.user.exception.NotFoundByIdException;
 import com.goriashin.usersubscription.core.domain.user.exception.UserNameAlreadyExistsException;
@@ -47,6 +48,16 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
                 "Entity not found",
+                e.getMessage()
+        );
+    }
+
+    @ExceptionHandler(DuplicateUserSubscriptionException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse duplicateUserSubscriptionException(DuplicateUserSubscriptionException e) {
+        return new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                "Subscription already linked to user",
                 e.getMessage()
         );
     }
