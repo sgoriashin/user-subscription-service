@@ -24,7 +24,8 @@ public class UserController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserRefView updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserUpdateView body) {
+    public UserRefView updateUser(@PathVariable("id") Long id,
+                                  @Valid @RequestBody UserUpdateView body) {
         return userViewService.updateUser(id, body);
     }
 

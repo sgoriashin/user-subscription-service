@@ -1,5 +1,6 @@
 package com.goriashin.usersubscription.web.exception;
 
+import com.goriashin.usersubscription.core.domain.subscription.exception.SubscriptionNotLinkedToUserException;
 import com.goriashin.usersubscription.core.domain.user.exception.NotFoundByIdException;
 import com.goriashin.usersubscription.core.domain.user.exception.UserNameAlreadyExistsException;
 import org.springframework.http.HttpStatus;
@@ -46,6 +47,16 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
                 "Entity not found",
+                e.getMessage()
+        );
+    }
+
+    @ExceptionHandler(SubscriptionNotLinkedToUserException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse subscriptionNotLinkedToUserException(SubscriptionNotLinkedToUserException e) {
+        return new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                "Subscription not linked to user",
                 e.getMessage()
         );
     }

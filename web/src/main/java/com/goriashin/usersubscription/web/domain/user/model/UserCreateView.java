@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 public class UserCreateView extends UserBaseView{
 
-    @NotBlank(message = "{user.username.notBlank}")
+    @NotBlank(message = "{field.required}")
     private String username;
     private LocalDateTime registrationDate;
 }
