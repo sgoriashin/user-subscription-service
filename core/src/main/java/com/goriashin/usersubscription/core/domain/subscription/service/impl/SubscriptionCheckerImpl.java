@@ -7,10 +7,12 @@ import com.goriashin.usersubscription.core.domain.subscription.repository.Subscr
 import com.goriashin.usersubscription.core.domain.subscription.service.SubscriptionChecker;
 import com.goriashin.usersubscription.core.domain.user.model.UserTM;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class SubscriptionCheckerImpl implements SubscriptionChecker {
 
     private final SubscriptionRepository repository;
@@ -20,6 +22,7 @@ public class SubscriptionCheckerImpl implements SubscriptionChecker {
         String subscriptionName = subscriptionTM.getSubscriptionName();
         UserTM userTM = subscriptionTM.getUser();
         if (repository.existsBySubscriptionNameAndUser(subscriptionName, userTM)) {
+            log.info("Subscription with name {} already exists for user with id: {}", subscriptionName, userTM.getId());
             throw new DuplicateUserSubscriptionException(subscriptionName, userTM.getId());
         }
     }
@@ -27,6 +30,8 @@ public class SubscriptionCheckerImpl implements SubscriptionChecker {
     @Override
     public void isSubscriptionLinkedToUser(SubscriptionTM subscriptionTM, UserTM userTM) {
         if (!userTM.equals(subscriptionTM.getUser())) {
+            log.info("Subscription with name {} is not linked to user with id: {}",
+                    subscriptionTM.getSubscriptionName(), userTM.getId());
             throw new SubscriptionNotLinkedToUserException(subscriptionTM.getId(), userTM.getId());
         }
     }
