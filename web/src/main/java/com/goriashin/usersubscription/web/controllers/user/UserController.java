@@ -1,5 +1,6 @@
 package com.goriashin.usersubscription.web.controllers.user;
 
+import com.goriashin.usersubscription.web.domain.user.model.UserFullView;
 import com.goriashin.usersubscription.web.domain.user.model.UserUpdateView;
 import com.goriashin.usersubscription.web.domain.user.service.UserViewService;
 import com.goriashin.usersubscription.web.domain.user.model.UserCreateView;
@@ -15,6 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserViewService userViewService;
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserFullView getUser(@PathVariable("id") Long id) {
+        return userViewService.getUser(id);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
