@@ -27,6 +27,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserTM updateUser(UserTM userTM) {
+        return userRepository.saveAndFlush(userTM);
+    }
+
+    @Override
     public void deleteUser(UserTM userTM) {
         userRepository.delete(userTM);
     }

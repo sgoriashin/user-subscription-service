@@ -1,5 +1,6 @@
 package com.goriashin.usersubscription.web.controllers.user;
 
+import com.goriashin.usersubscription.web.domain.user.model.UserUpdateView;
 import com.goriashin.usersubscription.web.domain.user.service.UserViewService;
 import com.goriashin.usersubscription.web.domain.user.model.UserCreateView;
 import com.goriashin.usersubscription.web.domain.user.model.UserRefView;
@@ -16,9 +17,15 @@ public class UserController {
     private final UserViewService userViewService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public UserRefView createUser(@Valid @RequestBody UserCreateView body) {
         return userViewService.createUser(body);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserRefView updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserUpdateView body) {
+        return userViewService.updateUser(id, body);
     }
 
     @DeleteMapping("/{id}")
