@@ -1,6 +1,7 @@
 package com.goriashin.usersubscription.web.controllers.subscription;
 
 import com.goriashin.usersubscription.web.domain.subscription.model.SubscriptionCreateView;
+import com.goriashin.usersubscription.web.domain.subscription.model.TopSubscriptionView;
 import com.goriashin.usersubscription.web.domain.subscription.model.SubscriptionLimitedView;
 import com.goriashin.usersubscription.web.domain.subscription.model.SubscriptionRefView;
 import com.goriashin.usersubscription.web.domain.subscription.service.SubscriptionViewService;
@@ -21,6 +22,12 @@ public class SubscriptionController {
     @ResponseStatus(HttpStatus.OK)
     public List<SubscriptionLimitedView> getSubscriptionsByUser(@PathVariable("id") Long userId) {
         return viewService.getSubscriptionsByUser(userId);
+    }
+
+    @GetMapping(path = "/subscriptions/top")
+    @ResponseStatus(HttpStatus.OK)
+    public List<TopSubscriptionView> getTopSubscriptions() {
+        return viewService.getTopSubscriptions();
     }
 
     @PostMapping(path = "/users/{id}/subscriptions")

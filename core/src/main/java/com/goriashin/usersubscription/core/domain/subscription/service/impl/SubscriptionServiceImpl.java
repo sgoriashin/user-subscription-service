@@ -1,12 +1,14 @@
 package com.goriashin.usersubscription.core.domain.subscription.service.impl;
 
 import com.goriashin.usersubscription.core.domain.subscription.model.SubscriptionTM;
+import com.goriashin.usersubscription.core.domain.subscription.model.TopSubscriptionDto;
 import com.goriashin.usersubscription.core.domain.subscription.repository.SubscriptionRepository;
 import com.goriashin.usersubscription.core.domain.subscription.service.SubscriptionChecker;
 import com.goriashin.usersubscription.core.domain.subscription.service.SubscriptionService;
 import com.goriashin.usersubscription.core.domain.user.exception.NotFoundByIdException;
 import com.goriashin.usersubscription.core.domain.user.model.UserTM;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +23,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public SubscriptionTM getById(Long id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundByIdException(id));
+    }
+
+    @Override
+    public List<TopSubscriptionDto> getTopSubscriptions(Pageable pageable) {
+        return repository.findTopSubscriptions(pageable);
     }
 
     @Override
