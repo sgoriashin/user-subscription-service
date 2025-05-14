@@ -9,6 +9,8 @@ import com.goriashin.usersubscription.core.domain.user.model.UserTM;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class SubscriptionServiceImpl implements SubscriptionService {
@@ -19,6 +21,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public SubscriptionTM getById(Long id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundByIdException(id));
+    }
+
+    @Override
+    public List<SubscriptionTM> getByUser(Long userId) {
+        return repository.findAllByUserId(userId);
     }
 
     @Override
