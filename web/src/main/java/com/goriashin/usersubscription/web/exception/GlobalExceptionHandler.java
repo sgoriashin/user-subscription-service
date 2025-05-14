@@ -1,5 +1,6 @@
 package com.goriashin.usersubscription.web.exception;
 
+import com.goriashin.usersubscription.core.domain.user.exception.NotFoundByIdException;
 import com.goriashin.usersubscription.core.domain.user.exception.UserNameAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -38,4 +39,15 @@ public class GlobalExceptionHandler {
                 e.getMessage()
         );
     }
+
+    @ExceptionHandler(NotFoundByIdException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse notFoundByIdException(NotFoundByIdException e) {
+        return new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(),
+                "Entity not found",
+                e.getMessage()
+        );
+    }
+
 }

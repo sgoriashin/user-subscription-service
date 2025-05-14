@@ -6,5 +6,6 @@ import com.goriashin.usersubscription.web.domain.user.model.UserRefView;
 public interface UserViewService {
 
     UserRefView createUser(UserCreateView view);
+    void deleteUser(Long id);
 
 }

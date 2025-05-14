@@ -25,4 +25,11 @@ public class UserViewServiceImpl implements UserViewService {
                 .id(savedUser.getId())
                 .build();
     }
+
+    @Override
+    public void deleteUser(Long id) {
+        UserTM userToDelete = userService.getById(id);
+        userService.deleteUser(userToDelete);
+    }
+
 }
