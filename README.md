@@ -40,12 +40,27 @@
 
 Примерные эндпоинты:
 
-- `POST /users` – создать пользователя
+- `POST /users` – создать пользователя  
+  Пример тела запроса:
+  username — обязательное поле
+  ```json
+  {
+    "username": "user",
+    "firstName": "firstName",
+    "lastName": "lastName"
+  }
+  
 - `GET /users/{id}` – получить информацию о пользователе
-- `PUT /users/{id}` – обновить пользователя
+- `PUT /users/{id}` – обновить пользователя, поля аналогичны созданию пользователя
 - `DELETE /users/{id}` – удалить пользователя
 
 - `POST /users/{id}/subscriptions` – добавить подписку
+   Пример тела запроса:
+  ```json
+  {
+     "subscriptionName": "Google"
+  }
+  
 - `GET /users/{id}/subscriptions` – получить подписки пользователя
 - `DELETE /users/{id}/subscriptions/{sub_id}` – удалить подписку
 
